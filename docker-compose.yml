@@ -1,0 +1,11 @@
+services:
+  api:
+    build:
+      context: ./api
+    ports:
+      - "8080:8000"
+    volumes:
+      - ./api:/var/www
+    environment:
+      - DB_CONNECTION=sqlite
+      - DB_DATABASE=/var/www/database/database.sqlite

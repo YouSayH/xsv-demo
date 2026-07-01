@@ -1,0 +1,14 @@
+FROM php:8.4-cli
+
+RUN apt-get update && apt-get install -y \
+    git unzip sqlite3 libsqlite3-dev \
+    && pecl install xdebug \
+    && docker-php-ext-enable xdebug
+
+COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+
+WORKDIR /var/www
+
+COPY ./xdebug.ini /usr/local/etc/php/conf.d/xdebug.ini
+
+ENTRYPOINT ["bash", "entrypoint.sh"]
