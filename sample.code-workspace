@@ -1,11 +1,7 @@
 {
-    "folders": [
-        {
-            "path": "api"
-        },
-        {
-            "path": "web"
-        }
-    ],
-    "settings": {}
+    "folders": [ { "path": "api" }, { "path": "web" } ],
+    "settings": {
+        "incident-copilot.traceContainerRoot": "/var/www/",
+        "incident-copilot.traceHostPrefix": "api/"
+    }
 }
