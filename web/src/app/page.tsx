@@ -1,6 +1,7 @@
 import UserList from '@/components/UserList';
 import UserDetail from '@/components/UserDetail';
 import CreateUserForm from '@/components/CreateUserForm';
+import ItemListPy from '@/components/ItemListPy';
 
 export default function Home() {
   return (
@@ -12,6 +13,7 @@ export default function Home() {
       <UserList />
       <UserDetail />
       <CreateUserForm />
+      <ItemListPy />
     </main>
   );
 }

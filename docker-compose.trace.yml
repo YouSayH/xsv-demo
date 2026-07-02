@@ -1,0 +1,21 @@
+# Xdebug 実行トレース用オーバーレイ（incident-copilot が自動生成）
+# 使い方: docker compose -f <base compose> -f docker-compose.trace.yml up -d --build
+# base 構成は変更しない。Xdebug は起動時に導入する。
+# 全リクエスト記録（トリガー不要）。単一ワーカー（artisan serve等）では破綻するため fpm 等のマルチワーカー前提。
+# command に composer/artisan 等の前処理を書く場合は XDEBUG_MODE=off を前置すること（CLIまで記録され起動が激遅になる）。
+services:
+  api:
+    volumes:
+      - ./.xdebug-trace:/var/www/storage/xdebug   # トレース出力をホスト直下 .xdebug-trace/ へ
+    environment:
+      XDEBUG_MODE: trace
+    command: >
+      sh -c "(php -m | grep -qi xdebug) || (pecl install xdebug && docker-php-ext-enable xdebug);
+      mkdir -p /var/www/storage/xdebug; chmod -R 0777 /var/www/storage/xdebug;
+      echo 'xdebug.mode=trace'                            > /usr/local/etc/php/conf.d/zz-xdebug-trace.ini;
+      echo 'xdebug.start_with_request=yes'            >> /usr/local/etc/php/conf.d/zz-xdebug-trace.ini;
+      echo 'xdebug.output_dir=/var/www/storage/xdebug'                  >> /usr/local/etc/php/conf.d/zz-xdebug-trace.ini;
+      echo 'xdebug.trace_output_name=trace.%t'            >> /usr/local/etc/php/conf.d/zz-xdebug-trace.ini;
+      echo 'xdebug.use_compression=0'                     >> /usr/local/etc/php/conf.d/zz-xdebug-trace.ini;
+      echo 'xdebug.trace_format=1'                        >> /usr/local/etc/php/conf.d/zz-xdebug-trace.ini;
+      php-fpm"

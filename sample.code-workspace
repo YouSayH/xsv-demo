@@ -1,5 +1,5 @@
 {
-    "folders": [ { "path": "api" }, { "path": "web" } ],
+    "folders": [ { "path": "api" }, { "path": "web" }, { "path": "py-api" } ],
     "settings": {
         "incident-copilot.traceContainerRoot": "/var/www/",
         "incident-copilot.traceHostPrefix": "api/"

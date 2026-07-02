@@ -1,7 +1,7 @@
 {
     // xsv-demo をフォルダとして（単一ルートで）開いたとき用。
     // マルチルート（sample.code-workspace）で開く場合は .code-workspace 側の settings が使われる。
-    "incident-copilot.traceDir": "api/.xdebug-trace",
+    "incident-copilot.traceDir": ".xdebug-trace",
     "incident-copilot.traceContainerRoot": "/var/www/",
     "incident-copilot.traceHostPrefix": "api/"
 }

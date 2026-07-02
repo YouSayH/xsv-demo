@@ -1,5 +1,9 @@
 .history
 .xdebug-trace/
+.py-trace/
+.cdp-trace/
+py-api/.venv/
+__pycache__/
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 # dependencies
